@@ -3,10 +3,6 @@
  */
 #include "sim.h"
 
-#include <stdint.h>
-#include <stdbool.h>
-#include <math.h>
-
 #define GRID_WIDTH  SCREEN_WIDTH
 #define GRID_HEIGHT SCREEN_HEIGHT
 
@@ -15,19 +11,13 @@
 #define TIME_STEP 1.0f
 
 #define STEPS_PER_FRAME 8u
-#define TARGET_FRAME_MS 16u /* ~60 FPS */
 
 /* Coral, Spots and loops, Chaos, Stripes, Waves*/
 static const float PRESET_F[5] = { 0.0540f, 0.0180f, 0.0260f, 0.029f, 0.014f };
 static const float PRESET_K[5] = { 0.0620f, 0.0510f, 0.0510f, 0.057f, 0.045f };
 
-static float u[GRID_HEIGHT][GRID_WIDTH];
-static float v[GRID_HEIGHT][GRID_WIDTH];
-static float u_next[GRID_HEIGHT][GRID_WIDTH];
-static float v_next[GRID_HEIGHT][GRID_WIDTH];
-
 /* U=1/V=0 everywhere with a seeded circular blob in the middle. */
-static void init_grid(void) {
+static void init_grid(float (*restrict u)[GRID_WIDTH], float (*restrict v)[GRID_WIDTH]) {
     for (uint32_t y = 0u; y < GRID_HEIGHT; y++) {
         for (uint32_t x = 0u; x < GRID_WIDTH; x++) {
             u[y][x] = 1.0f;
@@ -50,7 +40,9 @@ static void init_grid(void) {
     }
 }
 
-static void sim_step(float feed, float kill) {
+static void sim_step(float (*restrict u)[GRID_WIDTH], float (*restrict v)[GRID_WIDTH],
+                     float (*restrict u_next)[GRID_WIDTH], float (*restrict v_next)[GRID_WIDTH],
+                     float feed, float kill) {
     for (uint32_t y = 0u; y < GRID_HEIGHT; y++) {
         uint32_t yn = (y + 1u) % GRID_HEIGHT;
         uint32_t ys = (y + GRID_HEIGHT - 1u) % GRID_HEIGHT;
@@ -94,19 +86,23 @@ static uint32_t colormap(float value) {
 
     uint32_t r = (uint32_t)(t * t * 255.0f);
     uint32_t g = (uint32_t)(t * 255.0f);
-    uint32_t b = (uint32_t)(sqrtf(t) * 255.0f);
+    uint32_t b = (uint32_t)(t * (2.0f - t) * 255.0f);
 
     return 0xFF000000u | (r << 16) | (g << 8) | b;
 }
 
 void app(void) {
-    init_grid();
+    float u[GRID_HEIGHT][GRID_WIDTH];
+    float v[GRID_HEIGHT][GRID_WIDTH];
+    float u_next[GRID_HEIGHT][GRID_WIDTH];
+    float v_next[GRID_HEIGHT][GRID_WIDTH];
+
+    init_grid(u, v);
 
     uint32_t preset_index = 0u;
     bool paused = false;
     bool prev_space = false;
     bool prev_r = false;
-    uint32_t last_ticks = get_ticks_ms();
 
     while (!should_quit()) {
         bool space_now = is_key_pressed(KEY_SPACE);
@@ -117,7 +113,7 @@ void app(void) {
 
         bool r_now = is_key_pressed(KEY_R);
         if (r_now && !prev_r) {
-            init_grid();
+            init_grid(u, v);
         }
         prev_r = r_now;
 
@@ -135,7 +131,7 @@ void app(void) {
 
         if (!paused) {
             for (uint32_t s = 0u; s < STEPS_PER_FRAME; s++) {
-                sim_step(PRESET_F[preset_index], PRESET_K[preset_index]);
+                sim_step(u, v, u_next, v_next, PRESET_F[preset_index], PRESET_K[preset_index]);
             }
         }
 
@@ -145,12 +141,5 @@ void app(void) {
             }
         }
         flush();
-
-        uint32_t now = get_ticks_ms();
-        uint32_t elapsed = now - last_ticks;
-        if (elapsed < TARGET_FRAME_MS) {
-            delay_ms(TARGET_FRAME_MS - elapsed);
-        }
-        last_ticks = get_ticks_ms();
     }
 }

@@ -16,11 +16,9 @@
 #define KEY_5      6u
 
 void put_pixel(uint32_t y, uint32_t x, uint32_t argb);
-void flush(void);
+void flush(void); /* presents the frame and sleeps to cap the frame rate */
 
 bool should_quit(void);
 bool is_key_pressed(uint32_t key);
-uint32_t get_ticks_ms(void);
-void delay_ms(uint32_t ms);
 
 #endif /* SIM_H */

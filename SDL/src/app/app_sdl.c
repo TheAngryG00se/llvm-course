@@ -8,6 +8,9 @@ static SDL_Renderer *renderer = NULL;
 static SDL_Texture *texture = NULL;
 static uint32_t pixels[SCREEN_HEIGHT][SCREEN_WIDTH];
 
+#define TARGET_FRAME_MS 16u /* ~60 FPS */
+
+static uint32_t last_flush_ticks = 0u;
 static bool quit_requested = false;
 static bool key_down[7] = { false, false, false, false, false, false, false };
 
@@ -70,6 +73,14 @@ void flush(void) {
     SDL_RenderClear(renderer);
     SDL_RenderCopy(renderer, texture, NULL, NULL);
     SDL_RenderPresent(renderer);
+
+    /* Frame pacing lives here so logic needs no timing API. Bounded sleep,
+     * not an event wait. */
+    uint32_t elapsed = (uint32_t)SDL_GetTicks() - last_flush_ticks;
+    if (elapsed < TARGET_FRAME_MS) {
+        SDL_Delay(TARGET_FRAME_MS - elapsed);
+    }
+    last_flush_ticks = (uint32_t)SDL_GetTicks();
 }
 
 bool should_quit(void) {
@@ -85,15 +96,4 @@ bool is_key_pressed(uint32_t key) {
         return false;
     }
     return key_down[key];
-}
-
-uint32_t get_ticks_ms(void) {
-    if (window == NULL) {
-        init_sdl();
-    }
-    return (uint32_t)SDL_GetTicks();
-}
-
-void delay_ms(uint32_t ms) {
-    SDL_Delay(ms);
 }
