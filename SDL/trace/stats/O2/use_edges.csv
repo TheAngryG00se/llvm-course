@@ -1,0 +1,67 @@
+user,operand,count,percent
+getelementptr,zext,1843200040,15.97
+getelementptr,alloca,1545675686,13.39
+load,getelementptr,1392000040,12.06
+llvm.fmuladd,load,1382400000,11.98
+llvm.fmuladd,llvm.fmuladd,1382400000,11.98
+getelementptr,phi,1248095512,10.81
+fmul,load,393600000,3.41
+llvm.fmuladd,fmul,230400000,2.00
+zext,urem,153792000,1.33
+store,getelementptr,153615686,1.33
+fadd,load,153600040,1.33
+llvm.fmuladd,fneg,153600000,1.33
+fadd,llvm.fmuladd,153600000,1.33
+store,fadd,153600000,1.33
+fmul,fmul,96000000,0.83
+add,phi,86583960,0.75
+br,icmp,86535880,0.75
+icmp,add,86525860,0.75
+trunc,phi,86508000,0.75
+trunc,add,76906000,0.67
+urem,add,76896000,0.67
+add,trunc,76896000,0.67
+urem,trunc,76896000,0.67
+fsub,load,76800000,0.67
+llvm.fmuladd,fsub,76800000,0.67
+fneg,fmul,76800000,0.67
+fmul,phi,38400000,0.33
+fptoui,fmul,28800000,0.25
+fcmp,fmul,19200000,0.17
+shl,fptoui,19200000,0.17
+br,fcmp,19200000,0.17
+or,shl,19200000,0.17
+or,or,19200000,0.17
+call @put_pixel,trunc,19200000,0.17
+fmul,fsub,9600000,0.08
+or,fptoui,9600000,0.08
+call @put_pixel,or,9600000,0.08
+fsub,phi,9600000,0.08
+bitcast,getelementptr,120000,0.00
+store,bitcast,120000,0.00
+getelementptr,getelementptr,60000,0.00
+getelementptr,add,48000,0.00
+mul,add,20200,0.00
+add,mul,20000,0.00
+icmp,trunc,10000,0.00
+getelementptr,or,7860,0.00
+or,phi,5040,0.00
+llvm.memcpy,bitcast,640,0.00
+br,call @is_key_pressed,80,0.00
+select,phi,40,0.00
+xor,call @is_key_pressed,40,0.00
+or,xor,40,0.00
+zext,phi,20,0.00
+br,call @should_quit,20,0.00
+and,phi,20,0.00
+and,select,20,0.00
+xor,and,20,0.00
+icmp,and,20,0.00
+select,call @is_key_pressed,20,0.00
+fneg,fadd,20,0.00
+select,or,20,0.00
+select,xor,20,0.00
+br,or,20,0.00
+bitcast,alloca,4,0.00
+llvm.lifetime.start,bitcast,4,0.00
+llvm.memset,bitcast,1,0.00

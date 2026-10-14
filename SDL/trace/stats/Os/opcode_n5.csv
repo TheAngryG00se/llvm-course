@@ -1,0 +1,191 @@
+pattern,count,percent
+getelementptr | load | llvm.fmuladd | getelementptr | load,998400000,15.99
+llvm.fmuladd | getelementptr | load | llvm.fmuladd | getelementptr,921600000,14.76
+load | llvm.fmuladd | getelementptr | load | llvm.fmuladd,921600000,14.76
+getelementptr | load | getelementptr | load | fmul,153600000,2.46
+load | getelementptr | load | fmul | llvm.fmuladd,153600000,2.46
+br | add | trunc | urem | trunc,76896000,1.23
+trunc | urem | trunc | add | urem,76896000,1.23
+add | trunc | urem | trunc | add,76896000,1.23
+urem | trunc | add | urem | zext,76896000,1.23
+zext | getelementptr | load | getelementptr | load,76800020,1.23
+load | llvm.fmuladd | fmul | fmul | fneg,76800000,1.23
+fneg | llvm.fmuladd | fsub | llvm.fmuladd | fadd,76800000,1.23
+fadd | getelementptr | store | llvm.fmuladd | llvm.fmuladd,76800000,1.23
+llvm.fmuladd | fadd | getelementptr | store | icmp,76800000,1.23
+urem | zext | getelementptr | load | getelementptr,76800000,1.23
+getelementptr | load | fmul | llvm.fmuladd | zext,76800000,1.23
+zext | getelementptr | load | llvm.fmuladd | getelementptr,76800000,1.23
+load | llvm.fmuladd | getelementptr | load | getelementptr,76800000,1.23
+getelementptr | load | fmul | llvm.fmuladd | getelementptr,76800000,1.23
+llvm.fmuladd | fmul | fmul | fneg | llvm.fmuladd,76800000,1.23
+llvm.fmuladd | fsub | llvm.fmuladd | fadd | getelementptr,76800000,1.23
+getelementptr | store | llvm.fmuladd | llvm.fmuladd | fadd,76800000,1.23
+fadd | getelementptr | store | icmp | br,76800000,1.23
+load | fmul | llvm.fmuladd | zext | getelementptr,76800000,1.23
+llvm.fmuladd | getelementptr | load | getelementptr | load,76800000,1.23
+load | fmul | llvm.fmuladd | getelementptr | load,76800000,1.23
+llvm.fmuladd | getelementptr | load | llvm.fmuladd | fmul,76800000,1.23
+fmul | fmul | fneg | llvm.fmuladd | fsub,76800000,1.23
+fsub | llvm.fmuladd | fadd | getelementptr | store,76800000,1.23
+store | llvm.fmuladd | llvm.fmuladd | fadd | getelementptr,76800000,1.23
+trunc | add | urem | zext | getelementptr,76800000,1.23
+fmul | llvm.fmuladd | zext | getelementptr | load,76800000,1.23
+fmul | llvm.fmuladd | getelementptr | load | llvm.fmuladd,76800000,1.23
+getelementptr | load | llvm.fmuladd | fmul | fmul,76800000,1.23
+fmul | fneg | llvm.fmuladd | fsub | llvm.fmuladd,76800000,1.23
+llvm.fmuladd | fadd | getelementptr | store | llvm.fmuladd,76800000,1.23
+llvm.fmuladd | llvm.fmuladd | fadd | getelementptr | store,76800000,1.23
+add | urem | zext | getelementptr | load,76800000,1.23
+llvm.fmuladd | zext | getelementptr | load | llvm.fmuladd,76800000,1.23
+icmp | br | add | trunc | urem,76799840,1.23
+store | icmp | br | add | trunc,76704000,1.23
+getelementptr | store | icmp | br | add,76704000,1.23
+getelementptr | load | fmul | fcmp | br,9600000,0.15
+fmul | fptoui | fsub | fmul | fmul,9600000,0.15
+fmul | fptoui | shl | shl | or,9600000,0.15
+or | or | or | trunc | call @put_pixel,9600000,0.15
+br | getelementptr | load | fmul | fcmp,9600000,0.15
+load | fmul | fcmp | br | fcmp,9600000,0.15
+fmul | fmul | fptoui | fmul | fptoui,9600000,0.15
+fptoui | fsub | fmul | fmul | fptoui,9600000,0.15
+fptoui | shl | shl | or | or,9600000,0.15
+or | or | trunc | call @put_pixel | add,9600000,0.15
+br | fmul | fmul | fptoui | fmul,9600000,0.15
+fmul | fcmp | br | fcmp | br,9600000,0.15
+fmul | fptoui | fmul | fptoui | fsub,9600000,0.15
+fsub | fmul | fmul | fptoui | shl,9600000,0.15
+shl | shl | or | or | or,9600000,0.15
+or | trunc | call @put_pixel | add | icmp,9600000,0.15
+fptoui | fmul | fptoui | fsub | fmul,9600000,0.15
+fmul | fmul | fptoui | shl | shl,9600000,0.15
+shl | or | or | or | trunc,9600000,0.15
+trunc | call @put_pixel | add | icmp | br,9600000,0.15
+fcmp | br | fmul | fmul | fptoui,9591420,0.15
+fcmp | br | fcmp | br | fmul,9591420,0.15
+br | fcmp | br | fmul | fmul,9591420,0.15
+call @put_pixel | add | icmp | br | getelementptr,9588000,0.15
+icmp | br | getelementptr | load | fmul,9588000,0.15
+add | icmp | br | getelementptr | load,9588000,0.15
+bitcast | store | add | icmp | br,120000,0.00
+br | getelementptr | bitcast | store | add,120000,0.00
+getelementptr | bitcast | store | add | icmp,120000,0.00
+store | add | icmp | br | getelementptr,119400,0.00
+icmp | br | getelementptr | bitcast | store,119400,0.00
+add | icmp | br | getelementptr | bitcast,119400,0.00
+urem | zext | zext | br | add,96000,0.00
+trunc | add | urem | zext | zext,96000,0.00
+zext | br | add | trunc | urem,96000,0.00
+zext | zext | br | add | trunc,96000,0.00
+store | icmp | br | icmp | br,96000,0.00
+add | urem | zext | zext | br,96000,0.00
+getelementptr | store | icmp | br | icmp,96000,0.00
+icmp | br | icmp | br | add,95840,0.00
+br | icmp | br | add | trunc,95840,0.00
+icmp | br | add | icmp | br,14857,0.00
+add | icmp | br | add | icmp,12700,0.00
+call @put_pixel | add | icmp | br | add,12000,0.00
+br | trunc | br | getelementptr | load,12000,0.00
+trunc | br | getelementptr | load | fmul,12000,0.00
+icmp | br | trunc | br | getelementptr,11980,0.00
+add | icmp | br | trunc | br,11980,0.00
+br | add | icmp | br | trunc,11980,0.00
+br | add | icmp | br | add,10100,0.00
+add | icmp | br | add | mul,10000,0.00
+add | mul | add | trunc | icmp,10000,0.00
+mul | add | trunc | icmp | br,10000,0.00
+br | add | mul | add | trunc,10000,0.00
+icmp | br | add | mul | add,9900,0.00
+br | fcmp | br | br | fmul,8580,0.00
+br | br | fmul | fmul | fptoui,8580,0.00
+fcmp | br | br | fmul | fmul,8580,0.00
+fcmp | br | fcmp | br | br,8580,0.00
+trunc | icmp | br | getelementptr | store,7843,0.00
+store | getelementptr | store | br | add,7843,0.00
+icmp | br | getelementptr | store | getelementptr,7843,0.00
+getelementptr | store | br | add | icmp,7843,0.00
+br | getelementptr | store | getelementptr | store,7843,0.00
+store | br | add | icmp | br,7843,0.00
+add | trunc | icmp | br | getelementptr,7843,0.00
+getelementptr | store | getelementptr | store | br,7843,0.00
+add | trunc | icmp | br | add,2157,0.00
+trunc | icmp | br | add | icmp,2157,0.00
+store | add | icmp | br | add,600,0.00
+br | br | getelementptr | bitcast | store,600,0.00
+icmp | br | br | getelementptr | bitcast,599,0.00
+br | add | icmp | br | br,599,0.00
+add | icmp | br | br | getelementptr,599,0.00
+icmp | br | icmp | br | llvm.memcpy,160,0.00
+llvm.experimental.noalias.scope.decl | llvm.experimental.noalias.scope.decl | llvm.experimental.noalias.scope.decl | llvm.experimental.noalias.scope.decl | br,160,0.00
+llvm.experimental.noalias.scope.decl | llvm.experimental.noalias.scope.decl | br | add | trunc,160,0.00
+llvm.experimental.noalias.scope.decl | br | add | trunc | urem,160,0.00
+llvm.experimental.noalias.scope.decl | llvm.experimental.noalias.scope.decl | llvm.experimental.noalias.scope.decl | br | add,160,0.00
+br | llvm.experimental.noalias.scope.decl | llvm.experimental.noalias.scope.decl | llvm.experimental.noalias.scope.decl | llvm.experimental.noalias.scope.decl,160,0.00
+icmp | br | llvm.memcpy | llvm.memcpy | add,160,0.00
+br | icmp | br | llvm.memcpy | llvm.memcpy,160,0.00
+br | llvm.memcpy | llvm.memcpy | add | icmp,160,0.00
+llvm.memcpy | llvm.memcpy | add | icmp | br,160,0.00
+add | icmp | br | llvm.experimental.noalias.scope.decl | llvm.experimental.noalias.scope.decl,140,0.00
+llvm.memcpy | add | icmp | br | llvm.experimental.noalias.scope.decl,140,0.00
+icmp | br | llvm.experimental.noalias.scope.decl | llvm.experimental.noalias.scope.decl | llvm.experimental.noalias.scope.decl,140,0.00
+mul | br | add | mul | add,100,0.00
+icmp | br | add | mul | br,100,0.00
+add | mul | br | add | mul,100,0.00
+br | add | mul | br | add,100,0.00
+br | call @is_key_pressed | br | call @is_key_pressed | br,60,0.00
+call @is_key_pressed | br | call @is_key_pressed | br | call @is_key_pressed,60,0.00
+br | zext | getelementptr | load | getelementptr,20,0.00
+call @should_quit | br | call @is_key_pressed | xor | or,20,0.00
+br | call @is_key_pressed | select | br | and,20,0.00
+xor | or | and | xor | select,20,0.00
+select | call @is_key_pressed | xor | or | br,20,0.00
+br | call @is_key_pressed | br | call @is_key_pressed | select,20,0.00
+getelementptr | load | getelementptr | load | fadd,20,0.00
+br | call @is_key_pressed | xor | or | and,20,0.00
+or | br | call @is_key_pressed | br | call @is_key_pressed,20,0.00
+select | br | and | icmp | br,20,0.00
+icmp | br | zext | getelementptr | load,20,0.00
+call @is_key_pressed | select | br | and | icmp,20,0.00
+and | icmp | br | zext | getelementptr,20,0.00
+call @is_key_pressed | xor | or | br | call @is_key_pressed,20,0.00
+load | fadd | fneg | br | llvm.experimental.noalias.scope.decl,20,0.00
+or | and | xor | select | call @is_key_pressed,20,0.00
+call @is_key_pressed | br | call @is_key_pressed | select | br,20,0.00
+load | getelementptr | load | fadd | fneg,20,0.00
+llvm.memcpy | add | icmp | br | br,20,0.00
+br | and | icmp | br | zext,20,0.00
+add | icmp | br | br | trunc,20,0.00
+xor | or | br | call @is_key_pressed | br,20,0.00
+br | add | icmp | br | call @flush,20,0.00
+fneg | br | llvm.experimental.noalias.scope.decl | llvm.experimental.noalias.scope.decl | llvm.experimental.noalias.scope.decl,20,0.00
+fadd | fneg | br | llvm.experimental.noalias.scope.decl | llvm.experimental.noalias.scope.decl,20,0.00
+and | xor | select | call @is_key_pressed | xor,20,0.00
+getelementptr | load | fadd | fneg | br,20,0.00
+br | br | trunc | br | getelementptr,20,0.00
+call @is_key_pressed | xor | or | and | xor,20,0.00
+xor | select | call @is_key_pressed | xor | or,20,0.00
+icmp | br | br | trunc | br,20,0.00
+icmp | br | call @flush | call @should_quit | br,19,0.00
+add | icmp | br | call @flush | call @should_quit,19,0.00
+call @flush | call @should_quit | br | call @is_key_pressed | xor,19,0.00
+br | call @flush | call @should_quit | br | call @is_key_pressed,19,0.00
+alloca | bitcast | alloca | bitcast | alloca,2,0.00
+bitcast | alloca | bitcast | alloca | bitcast,2,0.00
+br | ret | call @should_quit | br | call @is_key_pressed,1,0.00
+getelementptr | getelementptr | call @init_grid | bitcast | llvm.memset,1,0.00
+llvm.lifetime.start | getelementptr | getelementptr | call @init_grid | bitcast,1,0.00
+llvm.memset | br | br | getelementptr | bitcast,1,0.00
+add | icmp | br | ret | call @should_quit,1,0.00
+bitcast | llvm.memset | br | br | getelementptr,1,0.00
+br | add | icmp | br | ret,1,0.00
+alloca | bitcast | llvm.lifetime.start | llvm.lifetime.start | llvm.lifetime.start,1,0.00
+llvm.lifetime.start | llvm.lifetime.start | getelementptr | getelementptr | call @init_grid,1,0.00
+bitcast | llvm.lifetime.start | llvm.lifetime.start | llvm.lifetime.start | llvm.lifetime.start,1,0.00
+icmp | br | ret | call @should_quit | br,1,0.00
+alloca | bitcast | alloca | bitcast | llvm.lifetime.start,1,0.00
+llvm.lifetime.start | llvm.lifetime.start | llvm.lifetime.start | llvm.lifetime.start | getelementptr,1,0.00
+getelementptr | call @init_grid | bitcast | llvm.memset | br,1,0.00
+ret | call @should_quit | br | call @is_key_pressed | xor,1,0.00
+call @init_grid | bitcast | llvm.memset | br | br,1,0.00
+bitcast | alloca | bitcast | llvm.lifetime.start | llvm.lifetime.start,1,0.00
+llvm.lifetime.start | llvm.lifetime.start | llvm.lifetime.start | getelementptr | getelementptr,1,0.00

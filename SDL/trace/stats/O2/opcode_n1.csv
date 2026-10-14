@@ -1,0 +1,33 @@
+pattern,count,percent
+getelementptr,1545735726,24.76
+llvm.fmuladd,1536000000,24.61
+load,1392000040,22.30
+fmul,364800000,5.84
+add,163489960,2.62
+trunc,163414000,2.62
+zext,153792020,2.46
+urem,153792000,2.46
+store,153735686,2.46
+fadd,153600020,2.46
+br,105861344,1.70
+icmp,86535880,1.39
+fsub,86400000,1.38
+fneg,76800020,1.23
+or,28805040,0.46
+fptoui,28800000,0.46
+fcmp,19200000,0.31
+shl,19200000,0.31
+call @put_pixel,9600000,0.15
+bitcast,120004,0.00
+mul,10100,0.00
+llvm.experimental.noalias.scope.decl,642,0.00
+llvm.memcpy,320,0.00
+call @is_key_pressed,140,0.00
+xor,60,0.00
+and,40,0.00
+select,40,0.00
+call @should_quit,20,0.00
+call @flush,20,0.00
+alloca,4,0.00
+llvm.lifetime.start,4,0.00
+llvm.memset,1,0.00

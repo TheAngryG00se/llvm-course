@@ -14,7 +14,7 @@ LOGIC_SRC := src/logic/logic.c
 BUILD_DIR := build
 IR_DIR := ir
 
-.PHONY: all debug opt0 opt3 ir asm clean
+.PHONY: all debug opt0 opt3 ir asm clean trace-pass trace-O2 trace-Os trace-stats
 
 all: $(BUILD_DIR)/rd
 
@@ -60,6 +60,27 @@ $(BUILD_DIR)/logic-O2.s: $(LOGIC_SRC) | $(BUILD_DIR)
 
 $(BUILD_DIR)/logic-O3.s: $(LOGIC_SRC) | $(BUILD_DIR)
 	$(CC) $(CSTD) $(WARN) $(INCLUDES) -O3 -march=native -S $< -o $@
+
+TRACE_SRC := trace
+TRACE_PASS := $(BUILD_DIR)/libIRTracePass.so
+TRACE_FRAMES ?= 20
+TRACE_HEAD ?= 5000
+
+trace-pass: $(TRACE_PASS)
+
+$(TRACE_PASS): $(TRACE_SRC)/IRTracePass.cpp | $(BUILD_DIR)
+	clang++ $< -fPIC -shared $(shell llvm-config --cxxflags) -o $@
+
+$(BUILD_DIR)/rd-trace-%: $(SRC) $(TRACE_SRC)/trace_rt.c $(TRACE_PASS) | $(BUILD_DIR)
+	$(CC) $(CSTD) $(WARN) $(INCLUDES) -$* -fpass-plugin=$(TRACE_PASS) -c $(LOGIC_SRC) -o $(BUILD_DIR)/logic-trace-$*.o
+	$(CC) $(CFLAGS) -O2 src/main.c src/app/app_sdl.c $(TRACE_SRC)/trace_rt.c $(BUILD_DIR)/logic-trace-$*.o -o $@ $(SDL_LIBS)
+
+trace-O2 trace-Os: trace-%: $(BUILD_DIR)/rd-trace-%
+	mkdir -p $(BUILD_DIR)/trace-$*
+	IR_TRACE_DIR=$(BUILD_DIR)/trace-$* IR_TRACE_FRAMES=$(TRACE_FRAMES) IR_TRACE_HEAD=$(TRACE_HEAD) ./$<
+	python3 $(TRACE_SRC)/analyze.py $(BUILD_DIR)/trace-$* $(TRACE_SRC)/stats/$* --opt=-$*
+
+trace-stats: trace-O2 trace-Os
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)

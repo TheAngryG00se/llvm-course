@@ -1,0 +1,6 @@
+events	6241979134
+frames	20
+distinct_5_windows	263
+head_frame	1
+head_start_event	312908150
+head_len	5000

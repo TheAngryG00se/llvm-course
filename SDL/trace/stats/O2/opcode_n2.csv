@@ -1,0 +1,98 @@
+pattern,count,percent
+getelementptr | load,1392000040,22.30
+load | llvm.fmuladd,1075200000,17.23
+llvm.fmuladd | getelementptr,1075200000,17.23
+load | fmul,163200000,2.61
+getelementptr | store,153615686,2.46
+zext | getelementptr,153600020,2.46
+load | getelementptr,153600020,2.46
+fadd | getelementptr,153600000,2.46
+fmul | llvm.fmuladd,153600000,2.46
+llvm.fmuladd | fadd,153600000,2.46
+fmul | fmul,96000000,1.54
+icmp | br,86535880,1.39
+br | add,76918800,1.23
+add | trunc,76906000,1.23
+urem | zext,76896000,1.23
+trunc | add,76896000,1.23
+trunc | urem,76896000,1.23
+add | urem,76896000,1.23
+urem | trunc,76896000,1.23
+llvm.fmuladd | fmul,76800000,1.23
+llvm.fmuladd | fsub,76800000,1.23
+store | icmp,76800000,1.23
+fsub | llvm.fmuladd,76800000,1.23
+store | llvm.fmuladd,76800000,1.23
+fmul | fneg,76800000,1.23
+llvm.fmuladd | llvm.fmuladd,76800000,1.23
+llvm.fmuladd | zext,76800000,1.23
+fneg | llvm.fmuladd,76800000,1.23
+fmul | fptoui,28800000,0.46
+fcmp | br,19200000,0.31
+or | or,19200000,0.31
+add | icmp,9629860,0.15
+br | getelementptr,9619843,0.15
+fptoui | fmul,9600000,0.15
+shl | or,9600000,0.15
+trunc | call @put_pixel,9600000,0.15
+br | fmul,9600000,0.15
+br | fcmp,9600000,0.15
+fptoui | fsub,9600000,0.15
+fptoui | shl,9600000,0.15
+call @put_pixel | add,9600000,0.15
+fmul | fcmp,9600000,0.15
+fsub | fmul,9600000,0.15
+shl | shl,9600000,0.15
+or | trunc,9600000,0.15
+getelementptr | bitcast,120000,0.00
+bitcast | store,120000,0.00
+zext | br,96000,0.00
+zext | zext,96000,0.00
+br | icmp,96000,0.00
+store | getelementptr,67843,0.00
+store | add,60000,0.00
+add | getelementptr,48000,0.00
+trunc | br,12000,0.00
+br | trunc,12000,0.00
+add | mul,10100,0.00
+mul | add,10000,0.00
+trunc | icmp,10000,0.00
+br | br,9200,0.00
+store | br,7843,0.00
+br | or,5000,0.00
+or | add,5000,0.00
+llvm.experimental.noalias.scope.decl | llvm.experimental.noalias.scope.decl,481,0.00
+br | llvm.memcpy,160,0.00
+llvm.memcpy | llvm.memcpy,160,0.00
+br | llvm.experimental.noalias.scope.decl,160,0.00
+llvm.experimental.noalias.scope.decl | br,160,0.00
+llvm.memcpy | add,160,0.00
+br | call @is_key_pressed,120,0.00
+mul | br,100,0.00
+call @is_key_pressed | br,80,0.00
+call @is_key_pressed | xor,40,0.00
+xor | or,40,0.00
+call @should_quit | br,20,0.00
+and | xor,20,0.00
+and | icmp,20,0.00
+br | and,20,0.00
+xor | select,20,0.00
+load | fadd,20,0.00
+select | br,20,0.00
+fneg | br,20,0.00
+call @is_key_pressed | select,20,0.00
+fadd | fneg,20,0.00
+select | call @is_key_pressed,20,0.00
+br | zext,20,0.00
+or | br,20,0.00
+br | call @flush,20,0.00
+or | and,20,0.00
+call @flush | call @should_quit,19,0.00
+bitcast | llvm.lifetime.start,4,0.00
+alloca | alloca,3,0.00
+llvm.lifetime.start | bitcast,3,0.00
+alloca | bitcast,1,0.00
+llvm.lifetime.start | llvm.experimental.noalias.scope.decl,1,0.00
+br | call @should_quit,1,0.00
+llvm.memset | br,1,0.00
+llvm.experimental.noalias.scope.decl | llvm.memset,1,0.00
