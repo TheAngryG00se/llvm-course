@@ -82,6 +82,55 @@ trace-O2 trace-Os: trace-%: $(BUILD_DIR)/rd-trace-%
 
 trace-stats: trace-O2 trace-Os
 
+# IR generator: ir2cpp turns the logic IR into IRBuilder C++ code
+# (irgen/app_ir_gen.cpp) that rebuilds it and runs app() in MCJIT.
+IRGEN_SRC := irgen
+IR2CPP := $(BUILD_DIR)/ir2cpp
+# No vectorization/unrolling: keeps the generated code scalar and readable.
+IRGEN_OPT ?= -O2 -fno-vectorize -fno-slp-vectorize -fno-unroll-loops
+LLVM_CXXFLAGS := $(shell llvm-config --cxxflags)
+LLVM_LIBS := $(shell llvm-config --ldflags --libs)
+
+.PHONY: irgen jit
+
+irgen: $(IRGEN_SRC)/app_ir_gen.cpp
+
+jit: $(BUILD_DIR)/rd-jit
+
+$(IR2CPP): $(IRGEN_SRC)/ir2cpp.cpp | $(BUILD_DIR)
+	clang++ $(LLVM_CXXFLAGS) $< -o $@ $(LLVM_LIBS)
+
+$(IR_DIR)/logic-gen.ll: $(LOGIC_SRC)
+	mkdir -p $(IR_DIR)
+	$(CC) $(CSTD) $(WARN) $(INCLUDES) $(IRGEN_OPT) -fno-discard-value-names -S -emit-llvm $< -o $@
+
+$(IRGEN_SRC)/app_ir_gen.cpp: $(IR_DIR)/logic-gen.ll $(IR2CPP)
+	$(IR2CPP) $< --entry=app --header=sim.h -o $@
+
+$(BUILD_DIR)/app_sdl.o: src/app/app_sdl.c src/app/sim.h | $(BUILD_DIR)
+	$(CC) $(CFLAGS) -O2 -c $< -o $@
+
+$(BUILD_DIR)/rd-jit: $(IRGEN_SRC)/app_ir_gen.cpp $(BUILD_DIR)/app_sdl.o
+	clang++ $(LLVM_CXXFLAGS) $(INCLUDES) -O2 $^ -o $@ $(LLVM_LIBS) $(SDL_LIBS)
+
+# Headless check: native logic and the JIT-run generator, both on a stub
+# sim.h backend, must print the same pixel hash.
+.PHONY: jit-check
+
+$(BUILD_DIR)/sim_stub.o: $(IRGEN_SRC)/sim_stub.c src/app/sim.h | $(BUILD_DIR)
+	$(CC) $(CSTD) $(WARN) $(INCLUDES) -O2 -c $< -o $@
+
+$(BUILD_DIR)/rd-stub: src/main.c $(LOGIC_SRC) $(BUILD_DIR)/sim_stub.o
+	$(CC) $(CSTD) $(WARN) $(INCLUDES) -O2 $^ -o $@
+
+$(BUILD_DIR)/rd-jit-stub: $(IRGEN_SRC)/app_ir_gen.cpp $(BUILD_DIR)/sim_stub.o
+	clang++ $(LLVM_CXXFLAGS) $(INCLUDES) -O2 $^ -o $@ $(LLVM_LIBS)
+
+jit-check: $(BUILD_DIR)/rd-stub $(BUILD_DIR)/rd-jit-stub
+	@native=$$(./$(BUILD_DIR)/rd-stub) && jit=$$(./$(BUILD_DIR)/rd-jit-stub | tail -n 1) && \
+	echo "native: $$native" && echo "jit:    $$jit" && \
+	if [ "$$native" = "$$jit" ]; then echo "jit-check: OK"; else echo "jit-check: MISMATCH"; exit 1; fi
+
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR)
 
